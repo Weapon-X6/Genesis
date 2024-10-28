@@ -1,5 +1,6 @@
-flask==2.2.3
-flask-restx==1.0.6
-Flask-SQLAlchemy==3.0.3
-psycopg2-binary==2.9.5
-pytest==7.2.1
+flask==2.3.3
+flask-restx==1.2.0
+Flask-SQLAlchemy==3.1.1
+psycopg2-binary==2.9.9
+pytest==7.4.3
+Werkzeug==2.3.8
