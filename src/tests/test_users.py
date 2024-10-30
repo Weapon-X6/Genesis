@@ -88,3 +88,20 @@ def test_single_user_incorrect_id(test_app, test_database):
     data = json.loads(res.data.decode())
     assert res.status_code == 404
     assert "User 999 does not exist" in data["message"]
+
+
+def test_all_users(test_app, test_database, add_user):
+    test_database.session.query(User).delete()
+    add_user("Pacita", "pacinitas@cusi.home")
+    add_user("Bebos", "panquechitas@gatillo.home")
+    client = test_app.test_client()
+
+    res = client.get("/users")
+
+    data = json.loads(res.data.decode())
+    assert res.status_code == 200
+    assert len(data) == 2
+    assert "Pacita" in data[0]["username"]
+    assert "pacinitas@cusi.home" in data[0]["email"]
+    assert "Bebos" in data[1]["username"]
+    assert "panquechitas@gatillo.home" in data[1]["email"]
